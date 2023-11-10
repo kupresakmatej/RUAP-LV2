@@ -2,6 +2,7 @@
 using ApiProject.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +16,9 @@ namespace ApiProject.Controllers
     {
         private ContactRepository contactRepository;
 
-        public ContactController()
+        public ContactController(IMemoryCache memoryCache)
         {
-            this.contactRepository = new ContactRepository();
+            this.contactRepository = new ContactRepository(memoryCache);
         }
 
         public Contact[] Get()
